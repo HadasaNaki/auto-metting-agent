@@ -45,7 +45,18 @@ jobs:
           ${{ runner.os }}-gradle-
           
     - name: 🔧 Make Gradlew Executable
-      run: chmod +x android_app/gradlew
+      run: |
+        chmod +x android_app/gradlew
+        ls -la android_app/gradlew
+        
+    - name: 🔍 Debug Project Structure
+      run: |
+        echo "📁 Project structure:"
+        ls -la android_app/
+        echo "📁 App directory:"
+        ls -la android_app/app/ || echo "No app directory found"
+        echo "📁 Gradle files:"
+        ls -la android_app/gradle/ || echo "No gradle directory found"
       
     - name: 📱 Build Perfect APK
       run: |
