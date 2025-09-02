@@ -1,0 +1,41 @@
+# Dockerfile לבניית Android APK
+FROM openjdk:17-jdk-slim
+
+# התקנת כלים בסיסיים
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# הגדרת משתני סביבה
+ENV ANDROID_HOME=/opt/android-sdk
+ENV PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/cmdline-tools/latest/bin
+
+# יצירת תיקיות
+RUN mkdir -p ${ANDROID_HOME}/cmdline-tools
+
+# הורדת Android Command Line Tools
+RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip \
+    && unzip -q cmdline-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
+    && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_HOME}/cmdline-tools/latest \
+    && rm cmdline-tools.zip
+
+# הסכמה לרישיונות
+RUN yes | sdkmanager --licenses
+
+# התקנת Android SDK components
+RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+
+# הגדרת תיקיית עבודה
+WORKDIR /app
+
+# העתקת קבצי הפרוייקט
+COPY android_app/ .
+
+# מתן הרשאות לגרדל
+RUN chmod +x gradlew
+
+# בניית APK
+CMD ["./gradlew", "assembleDebug"]
