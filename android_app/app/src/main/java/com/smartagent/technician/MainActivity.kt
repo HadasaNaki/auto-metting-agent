@@ -4,14 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.smartagent.technician.ui.main.MainScreen
-import com.smartagent.technician.ui.record.RecordCallScreen
+import com.smartagent.technician.ui.main.MainScreenSimple
+import com.smartagent.technician.ui.record.RecordCallScreenSimple
 import com.smartagent.technician.ui.theme.SmartAgentTechnicianTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
             SmartAgentTechnicianTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colors.background
                 ) {
                     val navController = rememberNavController()
 
@@ -32,32 +32,32 @@ class MainActivity : ComponentActivity() {
                         startDestination = "main"
                     ) {
                         composable("main") {
-                            MainScreen(navController)
+                            MainScreenSimple(navController)
                         }
 
                         composable("record_call") {
-                            RecordCallScreen(navController)
+                            RecordCallScreenSimple(navController)
                         }
 
                         composable("calls") {
                             // TODO: CallsListScreen
-                            MainScreen(navController)
+                            MainScreenSimple(navController)
                         }
 
                         composable("appointments") {
                             // TODO: AppointmentsScreen
-                            MainScreen(navController)
+                            MainScreenSimple(navController)
                         }
 
                         composable("customers") {
                             // TODO: CustomersScreen
-                            MainScreen(navController)
+                            MainScreenSimple(navController)
                         }
 
                         composable("call_details/{callId}") { backStackEntry ->
                             val callId = backStackEntry.arguments?.getString("callId")
                             // TODO: CallDetailsScreen
-                            MainScreen(navController)
+                            MainScreenSimple(navController)
                         }
 
                         composable("appointment_details/{appointmentId}") { backStackEntry ->
