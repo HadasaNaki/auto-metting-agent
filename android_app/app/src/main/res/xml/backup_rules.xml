@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- אפשר גיבוי של רוב הנתונים -->
+    <include domain="file" path="."/>
+    <include domain="database" path="."/>
+    <include domain="sharedpref" path="."/>
+    
+    <!-- אל תגבה נתונים רגישים -->
+    <exclude domain="sharedpref" path="secure_prefs.xml"/>
+    <exclude domain="database" path="secure_data.db"/>
+    <exclude domain="file" path="temp/"/>
+</full-backup-content>
