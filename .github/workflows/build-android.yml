@@ -48,40 +48,8 @@ jobs:
       run: |
         chmod +x android_app/gradlew
         ls -la android_app/gradlew
-        
-    - name: 📦 Setup Gradle Wrapper JAR
-      run: |
-        cd android_app
-        echo "🔍 Checking for gradle-wrapper.jar..."
-        if [ ! -f "gradle/wrapper/gradle-wrapper.jar" ]; then
-          echo "📥 Downloading gradle-wrapper.jar from Maven Central..."
-          curl -L -o gradle/wrapper/gradle-wrapper.jar \
-            https://repo1.maven.org/maven2/org/gradle/gradle-wrapper/8.4/gradle-wrapper-8.4.jar
-          
-          # If Maven Central fails, try alternative source
-          if [ ! -f "gradle/wrapper/gradle-wrapper.jar" ] || [ ! -s "gradle/wrapper/gradle-wrapper.jar" ]; then
-            echo "🔄 Trying alternative download source..."
-            rm -f gradle/wrapper/gradle-wrapper.jar
-            curl -L -o gradle-wrapper-temp.zip \
-              https://services.gradle.org/distributions/gradle-8.4-bin.zip
-            unzip -q gradle-wrapper-temp.zip
-            cp gradle-8.4/lib/gradle-wrapper-*.jar gradle/wrapper/gradle-wrapper.jar
-            rm -rf gradle-8.4 gradle-wrapper-temp.zip
-          fi
-          
-          if [ -f "gradle/wrapper/gradle-wrapper.jar" ]; then
-            echo "✅ gradle-wrapper.jar downloaded successfully"
-          else
-            echo "❌ Failed to download gradle-wrapper.jar"
-            exit 1
-          fi
-        else
-          echo "✅ gradle-wrapper.jar already exists"
-        fi
-        echo "📊 Wrapper directory contents:"
-        ls -la gradle/wrapper/
-        echo "📊 File type check:"
-        file gradle/wrapper/gradle-wrapper.jar || echo "File command failed"
+        echo "� Gradle Wrapper Files:"
+        ls -la android_app/gradle/wrapper/
         
     - name: 🔍 Debug Project Structure
       run: |
