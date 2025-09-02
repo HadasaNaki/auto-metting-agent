@@ -1,4 +1,4 @@
-# SmartAgent
+# SmartAgent - Ready for Deployment! 🚀
 
 מערכת SaaS מתקדמת לניהול טכנאים בתחום השירות עם יכולות עיבוד שיחות אוטומטי, תמלול, הפקת מידע באמצעות AI, וסנכרון יומנים.
 
