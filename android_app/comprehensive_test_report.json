@@ -1,0 +1,297 @@
+{
+  "timestamp": "2025-09-01T23:06:26.125278",
+  "summary": {
+    "total_tests": 25,
+    "passed": 17,
+    "warnings": 8,
+    "failed": 0,
+    "success_rate": 68.0,
+    "overall_grade": "B"
+  },
+  "categories": {
+    "audio": {
+      "passed": 2,
+      "warning": 1,
+      "failed": 0,
+      "total": 3
+    },
+    "ai": {
+      "passed": 3,
+      "warning": 0,
+      "failed": 0,
+      "total": 3
+    },
+    "info": {
+      "passed": 2,
+      "warning": 0,
+      "failed": 0,
+      "total": 2
+    },
+    "database": {
+      "passed": 4,
+      "warning": 0,
+      "failed": 0,
+      "total": 4
+    },
+    "ui": {
+      "passed": 1,
+      "warning": 3,
+      "failed": 0,
+      "total": 4
+    },
+    "offline": {
+      "passed": 4,
+      "warning": 1,
+      "failed": 0,
+      "total": 5
+    },
+    "performance": {
+      "passed": 1,
+      "warning": 3,
+      "failed": 0,
+      "total": 4
+    }
+  },
+  "detailed_results": [
+    {
+      "test": "audio_recording_Normal Call Recording",
+      "status": "passed",
+      "details": {
+        "name": "Normal Call Recording",
+        "duration": 45,
+        "quality": "good",
+        "expected": "success"
+      }
+    },
+    {
+      "test": "audio_recording_Short Call Recording",
+      "status": "warning",
+      "details": {
+        "name": "Short Call Recording",
+        "duration": 8,
+        "quality": "poor",
+        "expected": "warning"
+      }
+    },
+    {
+      "test": "audio_recording_Long Call Recording",
+      "status": "passed",
+      "details": {
+        "name": "Long Call Recording",
+        "duration": 180,
+        "quality": "excellent",
+        "expected": "success"
+      }
+    },
+    {
+      "test": "ai_transcription_sample1.wav",
+      "status": "passed",
+      "details": {
+        "audio": "sample1.wav",
+        "expected": "שלום, יש לי בעיה עם המזגן",
+        "language": "he-IL",
+        "confidence": 0.95
+      }
+    },
+    {
+      "test": "ai_transcription_sample2.wav",
+      "status": "passed",
+      "details": {
+        "audio": "sample2.wav",
+        "expected": "הדוד חשמל לא עובד",
+        "language": "he-IL",
+        "confidence": 0.87
+      }
+    },
+    {
+      "test": "ai_transcription_sample3.wav",
+      "status": "passed",
+      "details": {
+        "audio": "sample3.wav",
+        "expected": "מתי תוכל להגיע לתיקון",
+        "language": "he-IL",
+        "confidence": 0.92
+      }
+    },
+    {
+      "test": "info_extraction_call_1",
+      "status": "passed",
+      "details": {
+        "call_id": 1,
+        "accuracy": 0.9632811384362825,
+        "extracted_info": {
+          "problem_type": "מזגן לא עובד",
+          "location": "סלון",
+          "urgency": "בינונית",
+          "estimated_time": "2 שעות"
+        }
+      }
+    },
+    {
+      "test": "info_extraction_call_2",
+      "status": "passed",
+      "details": {
+        "call_id": 2,
+        "accuracy": 0.9262411947487904,
+        "extracted_info": {
+          "problem_type": "דוד חשמל",
+          "location": "אמבטיה",
+          "urgency": "גבוהה",
+          "estimated_time": "1.5 שעות"
+        }
+      }
+    },
+    {
+      "test": "database_insert_calls",
+      "status": "passed",
+      "details": {
+        "operation": "Insert Call",
+        "table": "calls",
+        "execution_time": 0.2002085151854538
+      }
+    },
+    {
+      "test": "database_update_customers",
+      "status": "passed",
+      "details": {
+        "operation": "Update Customer",
+        "table": "customers",
+        "execution_time": 0.16232445708131416
+      }
+    },
+    {
+      "test": "database_select_appointments",
+      "status": "passed",
+      "details": {
+        "operation": "Query Appointments",
+        "table": "appointments",
+        "execution_time": 0.15929909143212592
+      }
+    },
+    {
+      "test": "database_delete_calls",
+      "status": "passed",
+      "details": {
+        "operation": "Delete Old Data",
+        "table": "calls",
+        "execution_time": 0.261933207217254
+      }
+    },
+    {
+      "test": "ui_rendering_MainScreen",
+      "status": "warning",
+      "details": {
+        "name": "MainScreen",
+        "components": 8,
+        "rtl": true
+      }
+    },
+    {
+      "test": "ui_rendering_RecordCallScreen",
+      "status": "passed",
+      "details": {
+        "name": "RecordCallScreen",
+        "components": 5,
+        "rtl": true
+      }
+    },
+    {
+      "test": "ui_rendering_CustomersScreen",
+      "status": "warning",
+      "details": {
+        "name": "CustomersScreen",
+        "components": 6,
+        "rtl": true
+      }
+    },
+    {
+      "test": "ui_rendering_AppointmentsScreen",
+      "status": "warning",
+      "details": {
+        "name": "AppointmentsScreen",
+        "components": 7,
+        "rtl": true
+      }
+    },
+    {
+      "test": "offline_call_recording",
+      "status": "passed",
+      "details": {
+        "feature": "Call Recording"
+      }
+    },
+    {
+      "test": "offline_local_storage",
+      "status": "passed",
+      "details": {
+        "feature": "Local Storage"
+      }
+    },
+    {
+      "test": "offline_data_sync_queue",
+      "status": "warning",
+      "details": {
+        "feature": "Data Sync Queue"
+      }
+    },
+    {
+      "test": "offline_offline_ai_processing",
+      "status": "passed",
+      "details": {
+        "feature": "Offline AI Processing"
+      }
+    },
+    {
+      "test": "offline_cache_management",
+      "status": "passed",
+      "details": {
+        "feature": "Cache Management"
+      }
+    },
+    {
+      "test": "performance_app_startup",
+      "status": "warning",
+      "details": {
+        "metric": "App Startup",
+        "actual": 2.040253572232534,
+        "target": 2.0,
+        "unit": "seconds"
+      }
+    },
+    {
+      "test": "performance_memory_usage",
+      "status": "warning",
+      "details": {
+        "metric": "Memory Usage",
+        "actual": 179.0567164860801,
+        "target": 150,
+        "unit": "MB"
+      }
+    },
+    {
+      "test": "performance_battery_drain",
+      "status": "passed",
+      "details": {
+        "metric": "Battery Drain",
+        "actual": 4.26488547461369,
+        "target": 5,
+        "unit": "%/hour"
+      }
+    },
+    {
+      "test": "performance_network_usage",
+      "status": "warning",
+      "details": {
+        "metric": "Network Usage",
+        "actual": 10.577941675756676,
+        "target": 10,
+        "unit": "MB/hour"
+      }
+    }
+  ],
+  "mock_data_summary": {
+    "calls": 2,
+    "customers": 2,
+    "appointments": 2
+  }
+}

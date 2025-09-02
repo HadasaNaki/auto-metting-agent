@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartAgent טכנאי</string>
+
+    <!-- מסכים -->
+    <string name="main_screen_title">דשבורד ראשי</string>
+    <string name="calls_screen_title">שיחות</string>
+    <string name="appointments_screen_title">תורים</string>
+    <string name="customers_screen_title">לקוחות</string>
+    <string name="record_call_title">הקלטת שיחה</string>
+
+    <!-- פעולות -->
+    <string name="start_recording">התחל הקלטה</string>
+    <string name="stop_recording">עצור הקלטה</string>
+    <string name="processing_audio">מעבד שמע...</string>
+    <string name="save_call">שמור שיחה</string>
+    <string name="create_appointment">צור תור</string>
+    <string name="call_customer">התקשר ללקוח</string>
+    <string name="send_message">שלח הודעה</string>
+    <string name="navigate_to_location">נווט למיקום</string>
+
+    <!-- סטטוסים -->
+    <string name="status_pending">ממתין</string>
+    <string name="status_processing">מעבד</string>
+    <string name="status_completed">הושלם</string>
+    <string name="status_scheduled">מתוזמן</string>
+    <string name="status_in_progress">בביצוע</string>
+    <string name="status_cancelled">בוטל</string>
+
+    <!-- הודעות -->
+    <string name="recording_started">הקלטה החלה</string>
+    <string name="recording_stopped">הקלטה הופסקה</string>
+    <string name="audio_processing_started">עיבוד השמע החל</string>
+    <string name="call_saved_successfully">השיחה נשמרה בהצלחה</string>
+    <string name="appointment_created_successfully">התור נוצר בהצלחה</string>
+    <string name="error_recording_permission">נדרשת הרשאה להקלטה</string>
+    <string name="error_processing_audio">שגיאה בעיבוד השמע</string>
+    <string name="error_saving_call">שגיאה בשמירת השיחה</string>
+
+    <!-- מידע כללי -->
+    <string name="customer_name">שם לקוח</string>
+    <string name="phone_number">מספר טלפון</string>
+    <string name="device_type">סוג מכשיר</string>
+    <string name="issue_description">תיאור בעיה</string>
+    <string name="urgency_level">רמת דחיפות</string>
+    <string name="appointment_date">תאריך תור</string>
+    <string name="appointment_time">שעת תור</string>
+    <string name="estimated_cost">עלות משוערת</string>
+    <string name="actual_cost">עלות סופית</string>
+    <string name="location">מיקום</string>
+    <string name="notes">הערות</string>
+
+    <!-- רמות דחיפות -->
+    <string name="urgency_low">נמוכה</string>
+    <string name="urgency_medium">בינונית</string>
+    <string name="urgency_high">גבוהה</string>
+
+    <!-- קטגוריות מכשירים -->
+    <string name="device_refrigerator">מקרר</string>
+    <string name="device_air_conditioner">מזגן</string>
+    <string name="device_washing_machine">מכונת כביסה</string>
+    <string name="device_dishwasher">מדיח כלים</string>
+    <string name="device_oven">תנור</string>
+    <string name="device_gas_stove">כיריים גז</string>
+    <string name="device_microwave">מיקרוגל</string>
+    <string name="device_dryer">מייבש</string>
+    <string name="device_other">אחר</string>
+
+    <!-- סטטיסטיקות -->
+    <string name="total_calls">סה״כ שיחות</string>
+    <string name="pending_calls">שיחות ממתינות</string>
+    <string name="today_appointments">תורים היום</string>
+    <string name="completed_jobs">עבודות שהושלמו</string>
+    <string name="satisfaction_rate">שביעות רצון</string>
+    <string name="response_time">זמן תגובה</string>
+
+    <!-- ניווט -->
+    <string name="navigation_home">בית</string>
+    <string name="navigation_calls">שיחות</string>
+    <string name="navigation_appointments">תורים</string>
+    <string name="navigation_customers">לקוחות</string>
+    <string name="navigation_settings">הגדרות</string>
+
+    <!-- כפתורים -->
+    <string name="button_save">שמור</string>
+    <string name="button_cancel">ביטול</string>
+    <string name="button_delete">מחק</string>
+    <string name="button_edit">ערוך</string>
+    <string name="button_refresh">רענן</string>
+    <string name="button_back">חזור</string>
+    <string name="button_next">הבא</string>
+    <string name="button_done">סיום</string>
+
+    <!-- הרשאות -->
+    <string name="permission_microphone_title">הרשאת מיקרופון</string>
+    <string name="permission_microphone_message">האפליקציה זקוקה לגישה למיקרופון כדי להקליט שיחות</string>
+    <string name="permission_location_title">הרשאת מיקום</string>
+    <string name="permission_location_message">האפליקציה זקוקה לגישה למיקום לצורך ניווט ללקוחות</string>
+    <string name="permission_phone_title">הרשאת טלפון</string>
+    <string name="permission_phone_message">האפליקציה זקוקה לגישה לטלפון לצורך ביצוע שיחות</string>
+</resources>

@@ -1,0 +1,175 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: smartagent_db
+    environment:
+      POSTGRES_DB: smartagent
+      POSTGRES_USER: smart
+      POSTGRES_PASSWORD: agent123
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U smart -d smartagent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache & Message Broker
+  redis:
+    image: redis:7-alpine
+    container_name: smartagent_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # MinIO Object Storage (for audio files)
+  minio:
+    image: minio/minio:latest
+    container_name: smartagent_minio
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # Backend API (Python FastAPI)
+  backend:
+    image: python:3.11-slim
+    container_name: smartagent_backend
+    working_dir: /app
+    volumes:
+      - ../backend:/app
+      - ./requirements-combined.txt:/app/requirements.txt
+    environment:
+      DATABASE_URL: postgresql://smart:agent123@db:5432/smartagent
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin123
+      OPENAI_API_KEY: sk-test-key-for-development
+      TWILIO_ACCOUNT_SID: AC_test_sid
+      TWILIO_AUTH_TOKEN: test_auth_token
+      JWT_SECRET_KEY: super-secret-jwt-key-for-development
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: >
+      sh -c "
+        pip install --no-cache-dir -r requirements.txt &&
+        python -c 'import asyncio; from app.database import create_tables; asyncio.run(create_tables())' &&
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+      "
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Worker Service (Celery)
+  worker:
+    image: python:3.11-slim
+    container_name: smartagent_worker
+    working_dir: /app
+    volumes:
+      - ../worker:/app
+      - ../backend/app:/app/backend_app
+      - ./requirements-combined.txt:/app/requirements.txt
+    environment:
+      DATABASE_URL: postgresql://smart:agent123@db:5432/smartagent
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin123
+      OPENAI_API_KEY: sk-test-key-for-development
+      TWILIO_ACCOUNT_SID: AC_test_sid
+      TWILIO_AUTH_TOKEN: test_auth_token
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    command: >
+      sh -c "
+        pip install --no-cache-dir -r requirements.txt &&
+        celery -A tasks worker --loglevel=info
+      "
+
+  # Frontend Web App (Next.js)
+  frontend:
+    image: node:18-alpine
+    container_name: smartagent_frontend
+    working_dir: /app
+    volumes:
+      - ../frontend:/app
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+      NEXT_PUBLIC_SOCKET_URL: ws://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    command: >
+      sh -c "
+        npm install &&
+        npm run build &&
+        npm run start
+      "
+
+  # Flower (Celery monitoring)
+  flower:
+    image: python:3.11-slim
+    container_name: smartagent_flower
+    working_dir: /app
+    volumes:
+      - ../worker:/app
+      - ./requirements-combined.txt:/app/requirements.txt
+    environment:
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "5555:5555"
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: >
+      sh -c "
+        pip install --no-cache-dir flower &&
+        celery -A tasks flower --port=5555 --broker=redis://redis:6379/0
+      "
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
+
+networks:
+  default:
+    name: smartagent_network

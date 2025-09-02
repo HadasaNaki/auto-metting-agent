@@ -1,0 +1,60 @@
+# SmartAgent Combined Requirements - כל החבילות הנדרשות
+# Backend Requirements
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+pydantic==2.5.0
+pydantic-settings==2.1.0
+alembic==1.13.1
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+argon2-cffi==23.1.0
+python-multipart==0.0.6
+
+# Worker Requirements
+celery==5.3.4
+redis==5.0.1
+kombu==5.3.4
+billiard==4.2.0
+
+# AI & ML
+openai==1.3.7
+whisper-openai==1.0.0
+torch==2.1.1
+transformers==4.36.0
+
+# External Integrations
+twilio==8.10.1
+google-auth==2.25.2
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+google-api-python-client==2.110.0
+python-dotenv==1.0.0
+requests==2.31.0
+httpx==0.25.2
+
+# Database & Storage
+boto3==1.34.0
+minio==7.2.0
+
+# Development & Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-mock==3.12.0
+httpx==0.25.2
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3
+click==8.1.7
+rich==13.7.0
+typer==0.9.0
+
+# Monitoring
+flower==2.0.1
+
+# Minimal packages for basic functionality
+aiofiles==23.2.1
+jinja2==3.1.2
+starlette==0.27.0
