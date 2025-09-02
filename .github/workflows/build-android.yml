@@ -30,7 +30,10 @@ jobs:
         
     - name: 🤖 Setup Android SDK
       uses: android-actions/setup-android@v3
-      
+      with:
+        api-level: 34
+        target: google_apis
+        
     - name: ✅ Accept Android SDK Licenses
       run: yes | sdkmanager --licenses || true
       
