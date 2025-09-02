@@ -49,6 +49,20 @@ jobs:
         chmod +x android_app/gradlew
         ls -la android_app/gradlew
         
+    - name: 📦 Setup Gradle Wrapper JAR
+      run: |
+        cd android_app
+        if [ ! -f "gradle/wrapper/gradle-wrapper.jar" ]; then
+          echo "📥 Downloading gradle-wrapper.jar from Maven Central..."
+          curl -L -o gradle/wrapper/gradle-wrapper.jar \
+            https://repo1.maven.org/maven2/org/gradle/gradle-wrapper/8.4/gradle-wrapper-8.4.jar
+          echo "✅ gradle-wrapper.jar downloaded successfully"
+        else
+          echo "✅ gradle-wrapper.jar already exists"
+        fi
+        ls -la gradle/wrapper/
+        file gradle/wrapper/gradle-wrapper.jar
+        
     - name: 🔍 Debug Project Structure
       run: |
         echo "📁 Project structure:"
