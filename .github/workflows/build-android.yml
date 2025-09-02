@@ -64,8 +64,8 @@ jobs:
       run: |
         cd android_app
         echo "🚀 Building SmartAgent with revolutionary AI features..."
-        ./gradlew clean
-        ./gradlew assembleDebug --stacktrace --info
+        ./gradlew clean --stacktrace
+        ./gradlew assembleDebug --stacktrace --info --continue
         
     - name: ✅ Verify APK Built Successfully
       run: |
