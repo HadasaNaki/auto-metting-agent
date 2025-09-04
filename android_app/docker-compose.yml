@@ -1,0 +1,18 @@
+# Docker Compose for Android Development Environment
+version: '3.8'
+
+services:
+  android-dev:
+    build: .
+    container_name: smartagent-android-dev
+    volumes:
+      - .:/workspace
+      - gradle-cache:/root/.gradle
+    environment:
+      - ANDROID_SDK_ROOT=/opt/android-sdk
+      - JAVA_HOME=/usr/local/openjdk-17
+    working_dir: /workspace
+    command: bash -c "sleep infinity"
+    
+volumes:
+  gradle-cache:

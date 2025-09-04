@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SmartAgent טכנאי</string>
-
-    <!-- מסכים -->
-    <string name="main_screen_title">דשבורד ראשי</string>
-    <string name="calls_screen_title">שיחות</string>
-    <string name="appointments_screen_title">תורים</string>
-    <string name="customers_screen_title">לקוחות</string>
-    <string name="record_call_title">הקלטת שיחה</string>
-
-    <!-- פעולות -->
-    <string name="start_recording">התחל הקלטה</string>
-    <string name="stop_recording">עצור הקלטה</string>
-    <string name="processing_audio">מעבד שמע...</string>
-    <string name="save_call">שמור שיחה</string>
-    <string name="create_appointment">צור תור</string>
-    <string name="call_customer">התקשר ללקוח</string>
-    <string name="send_message">שלח הודעה</string>
-    <string name="navigate_to_location">נווט למיקום</string>
-
-    <!-- סטטוסים -->
-    <string name="status_pending">ממתין</string>
-    <string name="status_processing">מעבד</string>
-    <string name="status_completed">הושלם</string>
-    <string name="status_scheduled">מתוזמן</string>
-    <string name="status_in_progress">בביצוע</string>
-    <string name="status_cancelled">בוטל</string>
-
-    <!-- הודעות -->
+</resources>
     <string name="recording_started">הקלטה החלה</string>
     <string name="recording_stopped">הקלטה הופסקה</string>
     <string name="audio_processing_started">עיבוד השמע החל</string>
