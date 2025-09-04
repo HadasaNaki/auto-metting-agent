@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SmartAgent טכנאי</string>
-</resources>
+    
+    <!-- Recording strings -->
     <string name="recording_started">הקלטה החלה</string>
     <string name="recording_stopped">הקלטה הופסקה</string>
     <string name="audio_processing_started">עיבוד השמע החל</string>
