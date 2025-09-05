@@ -1,0 +1,43 @@
+name: "🧪 TEST 1: Basic SDK Check"
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test-basic-sdk:
+    runs-on: ubuntu-latest
+    name: "Test SDK Versions"
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Check Java Version
+      run: |
+        java -version
+        javac -version
+        echo "JAVA_HOME=$JAVA_HOME"
+        
+    - name: Test Android SDK Setup
+      uses: android-actions/setup-android@v3
+      
+    - name: Check Android SDK
+      run: |
+        echo "ANDROID_HOME=$ANDROID_HOME"
+        echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+        ls -la $ANDROID_HOME || echo "ANDROID_HOME not found"
+        ls -la $ANDROID_SDK_ROOT || echo "ANDROID_SDK_ROOT not found"
+        
+    - name: Check SDK Manager
+      run: |
+        which sdkmanager || echo "sdkmanager not found"
+        sdkmanager --version || echo "sdkmanager version failed"
+        sdkmanager --list || echo "sdkmanager list failed"

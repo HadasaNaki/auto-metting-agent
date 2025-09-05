@@ -1,0 +1,52 @@
+name: "🧪 TEST 3: CompileSdk Problem Test"
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test-compilesdk-issue:
+    runs-on: ubuntu-latest
+    name: "Test CompileSdk Issue"
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+      
+    - name: Install SDK Platforms
+      run: |
+        sdkmanager "platforms;android-33"
+        sdkmanager "platforms;android-34"
+        sdkmanager "build-tools;33.0.0"
+        sdkmanager "build-tools;34.0.0"
+        
+    - name: Test CompileSdk 30
+      run: |
+        cd simple_app
+        # Test with compileSdk 30
+        sed -i 's/compileSdk 33/compileSdk 30/' app/build.gradle
+        ./gradlew assembleDebug --stacktrace || echo "SDK 30 failed"
+        
+    - name: Test CompileSdk 33
+      run: |
+        cd simple_app
+        # Reset and test with compileSdk 33
+        git checkout app/build.gradle
+        ./gradlew assembleDebug --stacktrace || echo "SDK 33 failed"
+        
+    - name: Test CompileSdk 34
+      run: |
+        cd simple_app
+        # Test with compileSdk 34
+        sed -i 's/compileSdk 33/compileSdk 34/' app/build.gradle
+        ./gradlew assembleDebug --stacktrace || echo "SDK 34 failed"
