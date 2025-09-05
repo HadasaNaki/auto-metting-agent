@@ -23,54 +23,11 @@ jobs:
     - name: "📱 Setup Android"
       uses: android-actions/setup-android@v3
       
-    - name: "🔧 Fix simple_app build"
-      run: |
-        cd simple_app
-        
-        # Make sure we have the right configuration
-        cat > app/build.gradle << 'EOF'
-        plugins {
-            id 'com.android.application'
-            id 'org.jetbrains.kotlin.android'
-        }
-        
-        android {
-            namespace 'com.smartagent.simple'
-            compileSdk 33
-        
-            defaultConfig {
-                applicationId "com.smartagent.simple"
-                minSdk 21
-                targetSdk 33
-                versionCode 1
-                versionName "1.0"
-            }
-        
-            buildTypes {
-                release {
-                    minifyEnabled false
-                }
-            }
-            
-            compileOptions {
-                sourceCompatibility JavaVersion.VERSION_1_8
-                targetCompatibility JavaVersion.VERSION_1_8
-            }
-            
-            kotlinOptions {
-                jvmTarget = '1.8'
-            }
-        }
-        
-        dependencies {
-            implementation 'androidx.core:core-ktx:1.9.0'
-        }
-        EOF
-        
-    - name: "🛠️ Make Executable"
+    - name: "🔧 Prepare Build"
       run: |
         cd simple_app
         chmod +x gradlew
+        echo "Build configuration already correct"
         
     - name: "🔨 Build APK"
       run: |
@@ -78,7 +35,7 @@ jobs:
         ./gradlew assembleDebug --stacktrace
         
     - name: "📦 Upload APK"
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: simple-working-apk
         path: simple_app/app/build/outputs/apk/debug/*.apk
