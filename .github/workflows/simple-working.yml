@@ -1,4 +1,4 @@
-name: "🎯 FINAL FIX: All Issues Resolved"
+name: "✅ SIMPLE WORKING BUILD"
 
 on:
   push:
@@ -6,12 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-fixed:
+  simple-build:
     runs-on: ubuntu-latest
-    name: "🎯 Build APK (All Issues Fixed)"
+    name: "Simple Working APK"
     
     steps:
-    - name: "📥 Checkout Code"
+    - name: "📥 Checkout"
       uses: actions/checkout@v3
       
     - name: "☕ Setup JDK 17"
@@ -20,14 +20,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
-    - name: "📱 Setup Android SDK"
+    - name: "📱 Setup Android"
       uses: android-actions/setup-android@v3
       
-    - name: "🔧 Fix Build Configuration"
+    - name: "🔧 Fix simple_app build"
       run: |
         cd simple_app
         
-        # Fix the build.gradle to match JDK requirements
+        # Make sure we have the right configuration
         cat > app/build.gradle << 'EOF'
         plugins {
             id 'com.android.application'
@@ -67,53 +67,18 @@ jobs:
         }
         EOF
         
-        # Fix root build.gradle
-        cat > build.gradle << 'EOF'
-        buildscript {
-            repositories {
-                google()
-                mavenCentral()
-            }
-            dependencies {
-                classpath 'com.android.tools.build:gradle:7.4.0'
-                classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10'
-            }
-        }
-        
-        allprojects {
-            repositories {
-                google()
-                mavenCentral()
-            }
-        }
-        
-        task clean(type: Delete) {
-            delete rootProject.buildDir
-        }
-        EOF
-        
-    - name: "🛠️ Make Gradlew Executable"
+    - name: "🛠️ Make Executable"
       run: |
         cd simple_app
         chmod +x gradlew
         
-    - name: "🧹 Clean Build"
-      run: |
-        cd simple_app
-        ./gradlew clean --stacktrace --info
-        
     - name: "🔨 Build APK"
       run: |
         cd simple_app
-        ./gradlew assembleDebug --stacktrace --info
+        ./gradlew assembleDebug --stacktrace
         
     - name: "📦 Upload APK"
       uses: actions/upload-artifact@v3
       with:
-        name: simple-agent-apk
+        name: simple-working-apk
         path: simple_app/app/build/outputs/apk/debug/*.apk
-        
-    - name: "✅ Success Notification"
-      run: |
-        echo "🎉 APK build successful!"
-        ls -la simple_app/app/build/outputs/apk/debug/
